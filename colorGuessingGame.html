@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Color Guessing Game</title>
+  </head>
+  <body>
+    <h1>Color Guessing Game</h1>
+    <button type="button" onclick="runGame()">Start Game</button>
+
+    <script>
+        const COLORS_ARRAY = ["violet", " hotpink", " green", " black"];
+
+      function runGame() {
+        console.log("runGame function ran.");
+        let guess = "";
+                let correct = false;
+
+        
+                const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length);
+                const target = COLORS_ARRAY[targetIndex];
+
+
+          do {
+          guess = prompt(
+            "I am thinking of one of these colors:\n\n" +
+              COLORS_ARRAY +
+              "\n\nWhich color am I thinking of?\n"
+          );
+
+          if (guess === null) {
+            alert("The game has been aborted.");
+            return;
+          }
+
+                    correct = checkGuess(guess, target);
+                } while (!correct);
+                alert("Congrats! You've won the game.");
+                console.log("working")
+            }  
+         
+
+          correct = checkGuess(guess, target);
+        while (!correct); // Keep looping until the function checkGuess returns a value of 'true'
+
+        alert("Congratulations! You have guessed the color!");
+      
+
+      function checkGuess(guess, target) {
+        console.log("checkGuess function ran.");
+
+        const sorryMsg = "Sorry, your guess is incorrect.\n\n";
+        const tryMsg = "\n\nPlease try again.";
+        let correct = false;
+
+        if (!COLORS_ARRAY.includes(guess)) {
+          alert("Sorry, I don't recognize your color. " + tryMsg);
+        } else if (guess < target) {
+          console.log("guess ", guess);
+
+          alert(
+            sorryMsg +
+              "Hint: your color is alphabetically lower than mine." +
+              tryMsg
+          );
+        } else if (guess > target) {
+          console.log("guess ", guess);
+
+          alert(
+            sorryMsg +
+              "Hint: your color is alphabetically higher than mine." +
+              tryMsg
+          );
+        } else {
+          correct = true;
+        }
+        return correct;
+      }
+    </script>
+  </body>
+</html>
